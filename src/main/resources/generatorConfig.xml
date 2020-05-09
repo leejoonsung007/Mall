@@ -26,7 +26,7 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.shopping.mall" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.shopping.mall.pojo" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -39,10 +39,13 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="mall_order" domainObjectName="Order"
-               enableCountByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table tableName="mall_order_Item" domainObjectName="OrderItem"
+<!--        <table tableName="mall_order" domainObjectName="Order"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="mall_order_Item" domainObjectName="OrderItem"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <table tableName="mall_user" domainObjectName="User"
                enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false"/>
 

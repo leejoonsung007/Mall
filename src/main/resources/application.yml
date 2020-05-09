@@ -2,13 +2,20 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: xxx
+    password: XXX
     url: jdbc:mysql://127.0.0.1:3306/mall?characterEncoding=utf-8&useSSL=false
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+    # console log
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mappers/*.xml
+
 logging:
   pattern:
     console: "[%thread] %-5level %logger{36} - %msg%n"
 
+server:
+  servlet:
+    session:
+      timeout: 120
