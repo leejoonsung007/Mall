@@ -5,7 +5,7 @@ import com.shopping.mall.enums.ResponseEnum;
 import com.shopping.mall.enums.RoleEnum;
 import com.shopping.mall.pojo.User;
 import com.shopping.mall.service.IUserService;
-import com.shopping.mall.vo.UserResponseVo;
+import com.shopping.mall.vo.ResponseVo;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class UserServiceImplTest extends MallApplicationTests {
 
     @Test
     public void login() {
-        UserResponseVo<User> userResponseVo = userService.login(USERNAME, PASSWORD);
-        Assert.assertEquals(ResponseEnum.SUCCESS.getCode(), userResponseVo.getStatus());
+        ResponseVo<User> responseVo = userService.login(USERNAME, PASSWORD);
+        Assert.assertEquals(ResponseEnum.SUCCESS.getCode(), responseVo.getStatus());
     }
 }

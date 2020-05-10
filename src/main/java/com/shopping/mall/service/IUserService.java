@@ -1,12 +1,12 @@
 package com.shopping.mall.service;
 
 import com.shopping.mall.pojo.User;
-import com.shopping.mall.vo.UserResponseVo;
+import com.shopping.mall.vo.ResponseVo;
 
 public interface IUserService {
 
-    UserResponseVo<User> register(User user);
+    ResponseVo<User> register(User user);
 
-    UserResponseVo<User> login (String username, String password);
+    ResponseVo<User> login (String username, String password);
 
 }

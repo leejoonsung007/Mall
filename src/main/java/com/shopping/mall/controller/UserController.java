@@ -5,7 +5,7 @@ import com.shopping.mall.form.UserLoginForm;
 import com.shopping.mall.form.UserRegisterForm;
 import com.shopping.mall.pojo.User;
 import com.shopping.mall.service.IUserService;
-import com.shopping.mall.vo.UserResponseVo;
+import com.shopping.mall.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +29,13 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping("/user/register")
-    public UserResponseVo<User> register(@Valid @RequestBody UserRegisterForm userRegisterForm,
-                                   BindingResult bindingResult) {
+    public ResponseVo<User> register(@Valid @RequestBody UserRegisterForm userRegisterForm,
+                                     BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()){
             log.info("An error occurs, {} {}", Objects.requireNonNull(bindingResult.getFieldError()).getField(),
                     bindingResult.getFieldError().getDefaultMessage());
-            return UserResponseVo.error(ResponseEnum.PARAMETER_ERROR, bindingResult);
+            return ResponseVo.error(ResponseEnum.PARAMETER_ERROR, bindingResult);
         }
         User user = new User();
         BeanUtils.copyProperties(userRegisterForm, user);
@@ -44,40 +44,40 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
-    public UserResponseVo<User> login(@Valid @RequestBody UserLoginForm userLoginForm,
-                                      BindingResult bindingResult,
-                                      HttpServletRequest httpServletRequest) {
+    public ResponseVo<User> login(@Valid @RequestBody UserLoginForm userLoginForm,
+                                  BindingResult bindingResult,
+                                  HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
-            return UserResponseVo.error(ResponseEnum.PARAMETER_ERROR, bindingResult);
+            return ResponseVo.error(ResponseEnum.PARAMETER_ERROR, bindingResult);
         }
-        UserResponseVo<User> userResponseVo =  userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
+        ResponseVo<User> responseVo =  userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
 
         // set the session
         // or get the http session from the parameters directly
         HttpSession session = httpServletRequest.getSession();
-        session.setAttribute(CURRENT_USER, userResponseVo.getData());
+        session.setAttribute(CURRENT_USER, responseVo.getData());
         log.info("/login session={}", session.getId());
 
-        return userResponseVo;
+        return responseVo;
     }
 
     //session is saved in memory, TODO saves in token+redis - always login in
     @GetMapping("/user")
-    public UserResponseVo<User> userInfo(HttpSession session) {
+    public ResponseVo<User> userInfo(HttpSession session) {
         log.info("/user session={}", session.getId());
         User user = (User) session.getAttribute(CURRENT_USER);
         //TODO get the latest user from Database
         //get the latest user info
-        return UserResponseVo.success(user);
+        return ResponseVo.success(user);
     }
 
     @PostMapping("/user/logout")
     /*
      * the setting for session timeout is located in {@link TomServletWebServerFactory} getSessionTimeoutInMinutes
      */
-    public UserResponseVo<User> logout(HttpSession session) {
+    public ResponseVo<User> logout(HttpSession session) {
         log.info("/user/logout session={}", session.getId());
         session.removeAttribute(CURRENT_USER);
-        return UserResponseVo.success();
+        return ResponseVo.success();
     }
 }
