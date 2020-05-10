@@ -19,7 +19,13 @@ public enum ResponseEnum {
 
     NEED_LOGIN(10, "Please log in first"),
 
-    USERNAE_OR_PASSWORD_ERROR(11, "Username or Password is not correct");
+    USERNAE_OR_PASSWORD_ERROR(11, "Username or Password is not correct"),
+
+    PRODUCT_OFF_SALE(12, "Product is off sale"),
+
+    PRODUCT_OFF_DELETED(13, "Product has been deleted"),
+
+    PRODUCT_NOT_EXISTED(14, "Product is not existed");
 
     Integer code;
 

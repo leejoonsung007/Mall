@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.shopping.mall.constant.MallConstant.PARENT_ID;
@@ -59,6 +60,22 @@ public class CategoryServiceImpl implements ICategoryService {
             categoryVo.setSubCategories(subCategoryList);
 
             findSubCategory(categoryList, subCategoryList);
+        }
+    }
+
+    @Override
+    public void findSubCategoryId(Integer id, Set<Integer> resultSet) {
+        List<Category> categoryList = categoryMapper.selectAll();
+        findSubCategoryId(id, resultSet, categoryList);
+    }
+
+    // overload the method to avoid repeated calls to db
+    private void findSubCategoryId(Integer id, Set<Integer> resultSet, List<Category> categoryList) {
+        for (Category category: categoryList) {
+            if (category.getParentId().equals(id)) {
+                resultSet.add(category.getId());
+                findSubCategoryId(category.getId(), resultSet, categoryList);
+            }
         }
     }
 
