@@ -7,6 +7,6 @@ public interface IUserService {
 
     ResponseVo<User> register(User user);
 
-    ResponseVo<User> login (String username, String password);
+    ResponseVo<User> login(String username, String password);
 
 }

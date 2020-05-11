@@ -46,10 +46,10 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     private void findSubCategory(List<Category> categoryList, List<CategoryVo> categoryVoList) {
-        for (CategoryVo categoryVo: categoryVoList) {
+        for (CategoryVo categoryVo : categoryVoList) {
             List<CategoryVo> subCategoryList = new ArrayList<>();
 
-            for (Category category: categoryList) {
+            for (Category category : categoryList) {
                 if (categoryVo.getId().equals(category.getParentId())) {
                     CategoryVo subCategoryVo = categoryToCategoryVo(category);
                     subCategoryList.add(subCategoryVo);
@@ -71,7 +71,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
     // overload the method to avoid repeated calls to db
     private void findSubCategoryId(Integer id, Set<Integer> resultSet, List<Category> categoryList) {
-        for (Category category: categoryList) {
+        for (Category category : categoryList) {
             if (category.getParentId().equals(id)) {
                 resultSet.add(category.getId());
                 findSubCategoryId(category.getId(), resultSet, categoryList);

@@ -19,7 +19,7 @@ public class ProductController {
     @GetMapping("/products")
     public ResponseVo<PageInfo> getProducts(@RequestParam(required = false) Integer categoryId,
                                             @RequestParam(required = false, defaultValue = "1") Integer pageNum,
-                                            @RequestParam(required = false, defaultValue = "10") Integer pageSize){
+                                            @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         return productService.getProducts(categoryId, pageNum, pageSize);
     }
 

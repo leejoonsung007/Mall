@@ -87,28 +87,28 @@ public class CartServiceImpl implements ICartService {
         CartVo cartVo = new CartVo();
         List<CartProductVo> cartProductVoList = new ArrayList<>();
 
-        for (Map.Entry<String, String> entry: entries.entrySet()) {
-                Integer productId = Integer.valueOf(entry.getKey());
-                Cart cart = gson.fromJson(entry.getValue(), Cart.class);
+        for (Map.Entry<String, String> entry : entries.entrySet()) {
+            Integer productId = Integer.valueOf(entry.getKey());
+            Cart cart = gson.fromJson(entry.getValue(), Cart.class);
 
-                //TODO: use mysql in
-                Product product = productMapper.selectByPrimaryKey(productId);
-                if (product != null) {
-                    BigDecimal totalPrice = product.getPrice().multiply(BigDecimal.valueOf(cart.getQuantity()));
-                    CartProductVo cartProductVo = new CartProductVo(productId,
-                            cart.getQuantity(), product.getName(), product.getSubtitle(), product.getMainImage(),
-                            product.getPrice(), product.getStatus(), totalPrice,
-                            product.getStock(), cart.getSelected());
-                    cartProductVoList.add(cartProductVo);
+            //TODO: use mysql in
+            Product product = productMapper.selectByPrimaryKey(productId);
+            if (product != null) {
+                BigDecimal totalPrice = product.getPrice().multiply(BigDecimal.valueOf(cart.getQuantity()));
+                CartProductVo cartProductVo = new CartProductVo(productId,
+                        cart.getQuantity(), product.getName(), product.getSubtitle(), product.getMainImage(),
+                        product.getPrice(), product.getStatus(), totalPrice,
+                        product.getStock(), cart.getSelected());
+                cartProductVoList.add(cartProductVo);
 
-                    if (!cart.getSelected()) {
-                        selectAll = false;
-                    }
+                if (!cart.getSelected()) {
+                    selectAll = false;
+                }
 
-                    if (cart.getSelected()){
-                        cartTotalPrice = cartTotalPrice.add(cartProductVo.getProductTotalPrice());
-                    }
-                };
+                if (cart.getSelected()) {
+                    cartTotalPrice = cartTotalPrice.add(cartProductVo.getProductTotalPrice());
+                }
+            }
             cartTotalQuantity += cart.getQuantity();
         }
 
@@ -155,13 +155,13 @@ public class CartServiceImpl implements ICartService {
         return getCartDetail(uid);
     }
 
-    private List<Cart> generateListForCart (Integer uid) {
+    private List<Cart> generateListForCart(Integer uid) {
         HashOperations<String, String, String> opsForHash = redisTemplate.opsForHash();
         String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, uid);
         Map<String, String> entries = opsForHash.entries(redisKey);
 
         List<Cart> cartList = new ArrayList<>();
-        for (Map.Entry<String, String> entry: entries.entrySet()) {
+        for (Map.Entry<String, String> entry : entries.entrySet()) {
             Cart cart = gson.fromJson(entry.getValue(), Cart.class);
             cartList.add(cart);
         }
@@ -174,7 +174,7 @@ public class CartServiceImpl implements ICartService {
         String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, uid);
 
         List<Cart> cartList = generateListForCart(uid);
-        for (Cart cart: cartList) {
+        for (Cart cart : cartList) {
             cart.setSelected(true);
             // redis high performance
             opsForHash.put(redisKey, String.valueOf(cart.getProductId()), gson.toJson(cart));
@@ -188,7 +188,7 @@ public class CartServiceImpl implements ICartService {
         String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, uid);
 
         List<Cart> cartList = generateListForCart(uid);
-        for (Cart cart: cartList) {
+        for (Cart cart : cartList) {
             cart.setSelected(false);
             // redis high performance
             opsForHash.put(redisKey, String.valueOf(cart.getProductId()), gson.toJson(cart));

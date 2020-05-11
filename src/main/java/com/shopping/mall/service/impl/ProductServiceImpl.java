@@ -52,8 +52,8 @@ public class ProductServiceImpl implements IProductService {
                     return productVo;
                 })
                 .collect(Collectors.toList());
-            PageInfo pageInfo = new PageInfo<>(productList);
-            pageInfo.setList(productVoList);
+        PageInfo pageInfo = new PageInfo<>(productList);
+        pageInfo.setList(productVoList);
         return ResponseVo.success(pageInfo);
     }
 
@@ -67,7 +67,7 @@ public class ProductServiceImpl implements IProductService {
 
         if (OFF_SALE.getCode().equals(product.getStatus())) {
             return ResponseVo.error(ResponseEnum.PRODUCT_OFF_SALE);
-        } else if (DELETED.getCode().equals(product.getStatus())){
+        } else if (DELETED.getCode().equals(product.getStatus())) {
             return ResponseVo.error(ResponseEnum.PRODUCT_OFF_DELETED);
         }
 

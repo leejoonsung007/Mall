@@ -35,7 +35,7 @@ public enum ResponseEnum {
 
     String desc;
 
-   ResponseEnum(Integer code, String desc) {
+    ResponseEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }

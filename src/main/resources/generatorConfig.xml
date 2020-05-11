@@ -4,12 +4,12 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <classPathEntry location="/Users/leejoonsung/Downloads/mysql-connector-java-5.1.6.jar" />
+    <classPathEntry location="/Users/leejoonsung/Downloads/mysql-connector-java-5.1.6.jar"/>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
 
         <!--don't merge xml-->
-        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
 
         <!--don't generate comments-->
         <commentGenerator>
@@ -22,35 +22,35 @@
                         password="Humanoid&amp;007">
         </jdbcConnection>
 
-        <javaTypeResolver >
-            <property name="forceBigDecimals" value="false" />
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
         <javaModelGenerator targetPackage="com.shopping.mall.pojo" targetProject="src/main/java">
-            <property name="enableSubPackages" value="true" />
-            <property name="trimStrings" value="true" />
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="mappers"  targetProject="src/main/resources">
-            <property name="enableSubPackages" value="true" />
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.shopping.mall.dao"  targetProject="src/main/java">
-            <property name="enableSubPackages" value="true" />
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.shopping.mall.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-<!--        <table tableName="mall_order" domainObjectName="Order"-->
-<!--               enableCountByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
-<!--        <table tableName="mall_order_Item" domainObjectName="OrderItem"-->
-<!--               enableCountByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
-<!--        <table tableName="mall_user" domainObjectName="User"-->
-<!--               enableCountByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
-<!--        <table tableName="mall_category" domainObjectName="Category"-->
-<!--               enableCountByExample="false" enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <!--        <table tableName="mall_order" domainObjectName="Order"-->
+        <!--               enableCountByExample="false" enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <!--        <table tableName="mall_order_Item" domainObjectName="OrderItem"-->
+        <!--               enableCountByExample="false" enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <!--        <table tableName="mall_user" domainObjectName="User"-->
+        <!--               enableCountByExample="false" enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <!--        <table tableName="mall_category" domainObjectName="Category"-->
+        <!--               enableCountByExample="false" enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
 
         <table tableName="mall_product" domainObjectName="Product"
                enableCountByExample="false" enableDeleteByExample="false"

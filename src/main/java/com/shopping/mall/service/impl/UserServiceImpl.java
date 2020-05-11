@@ -49,7 +49,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ResponseVo<User> login(String username, String password) {
         User user = userMapper.selectByUsername(username);
-        if (user == null){
+        if (user == null) {
             //user is not existed
             return ResponseVo.error(ResponseEnum.USERNAE_OR_PASSWORD_ERROR);
         }

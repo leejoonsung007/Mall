@@ -37,7 +37,7 @@ public class UserController {
     @PostMapping("/user/login")
     public ResponseVo<User> login(@Valid @RequestBody UserLoginForm userLoginForm,
                                   HttpServletRequest httpServletRequest) {
-        ResponseVo<User> responseVo =  userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
+        ResponseVo<User> responseVo = userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
 
         // set the session
         // or get the http session from the parameters directly
