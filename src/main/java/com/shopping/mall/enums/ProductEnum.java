@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum ProductEnum {
 
-    ONS_SALE(1),
+    ON_SALE(1),
 
     OFF_SALE(2),
 

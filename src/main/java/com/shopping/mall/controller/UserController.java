@@ -1,6 +1,5 @@
 package com.shopping.mall.controller;
 
-import com.shopping.mall.enums.ResponseEnum;
 import com.shopping.mall.form.UserLoginForm;
 import com.shopping.mall.form.UserRegisterForm;
 import com.shopping.mall.pojo.User;
@@ -9,7 +8,6 @@ import com.shopping.mall.vo.ResponseVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Objects;
 
 import static com.shopping.mall.constant.MallConstant.CURRENT_USER;
 
@@ -29,14 +26,8 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping("/user/register")
-    public ResponseVo<User> register(@Valid @RequestBody UserRegisterForm userRegisterForm,
-                                     BindingResult bindingResult) {
+    public ResponseVo<User> register(@Valid @RequestBody UserRegisterForm userRegisterForm) {
 
-        if(bindingResult.hasErrors()){
-            log.info("An error occurs, {} {}", Objects.requireNonNull(bindingResult.getFieldError()).getField(),
-                    bindingResult.getFieldError().getDefaultMessage());
-            return ResponseVo.error(ResponseEnum.PARAMETER_ERROR, bindingResult);
-        }
         User user = new User();
         BeanUtils.copyProperties(userRegisterForm, user);
         //dto
@@ -45,11 +36,7 @@ public class UserController {
 
     @PostMapping("/user/login")
     public ResponseVo<User> login(@Valid @RequestBody UserLoginForm userLoginForm,
-                                  BindingResult bindingResult,
                                   HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            return ResponseVo.error(ResponseEnum.PARAMETER_ERROR, bindingResult);
-        }
         ResponseVo<User> responseVo =  userService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
 
         // set the session

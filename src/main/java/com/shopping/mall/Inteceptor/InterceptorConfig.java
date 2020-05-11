@@ -12,6 +12,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
         //TODO put path patterns to config file
         registry.addInterceptor(new UserLoginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/login", "/user/register", "/category" , "/products", "/products/*");
+                .excludePathPatterns("/user/login", "/user/register", "/category" , "/products", "/products/*", "/error");
     }
 }
