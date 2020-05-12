@@ -29,7 +29,11 @@ public enum ResponseEnum {
 
     PRODUCT_NOT_AVAILABLE(15, "Product is not available"),
 
-    PRODUCT_NOT_IN_CART(16, "Product is not in the cart");
+    PRODUCT_NOT_IN_CART(16, "Product is not in the cart"),
+
+    DELETE_SHIPPING_DETAIL_FAILED(17, "Cannot delete shipping details"),
+
+    UPDATE_SHIPPING_ADDRESS_FAILED(17, "Cannot update shipping details");
 
     Integer code;
 
